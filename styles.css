@@ -1,3 +1,16 @@
 .selected{
    background-color:#FAF6F5;
 }
+
+#loader{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.loaderr{
+    width: 550px;
+    height: 550px;
+    position: absolute;
+}

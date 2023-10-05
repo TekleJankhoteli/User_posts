@@ -2,8 +2,10 @@ let container = document.getElementById("container");
 let users = document.createElement("div");
 let allButton = document.createElement("button");
 let posts = document.createElement("div");
+let loader=document.getElementById("loader");
 let showAllPosts = true;
 let selectedUserId = null; 
+
 
 
 // style container/usersDiv/postsDiv
@@ -26,6 +28,7 @@ allButton.style.color="#8B7F7A";
 allButton.style.marginTop="10px";
 allButton.style.cursor = "pointer";
 
+
 //  add eventlisteners on all button
 allButton.addEventListener("mouseover",()=>{
     allButton.style.backgroundColor="#FFE5CC";
@@ -37,6 +40,17 @@ allButton.addEventListener("mouseout",()=>{
 })
 
 
+// functions for handling loader
+function showLoader() {
+    loader.style.display = "block";
+  }
+
+  function hideLoader() {
+    loader.style.display = "none";
+  }
+
+
+
 allButton.addEventListener("click", () => {
     const selectedUsernames = users.querySelectorAll('.selected');
     selectedUsernames.forEach((username) => {
@@ -45,16 +59,21 @@ allButton.addEventListener("click", () => {
 
     showAllPosts = !showAllPosts;
     selectedUserId = null;
+   
     fetchPosts();
+    
 });
 
 
 // function for fetch users and eventlistener for userName
 function fetchUsers() {
+  
     fetch("https://jsonplaceholder.typicode.com/users")
         .then((res) => res.json())
         .then((result) => {
+           
             result.forEach((element) => {
+               
                 let userName = document.createElement("h2");
                 userName.innerText = element.username;
                 userName.style.border="2px solid #FAF6F5";
@@ -64,7 +83,7 @@ function fetchUsers() {
 
 
              
-    
+              
             //    cklick
                 userName.addEventListener("click", () => {
                     console.log("cklicked")
@@ -80,7 +99,7 @@ function fetchUsers() {
                 });
 
 
-              
+          
                 users.appendChild(userName);
                 
             });
@@ -89,6 +108,7 @@ function fetchUsers() {
 
 // function for fetch posts
 function fetchPosts() {
+    showLoader()
     posts.innerHTML = "";
 
     fetch("https://jsonplaceholder.typicode.com/posts")
@@ -103,11 +123,13 @@ function fetchPosts() {
                     posts.appendChild(userPost);
                 }
             });
+            hideLoader()
         });
 }
 
 // function for fetching specific post by ID  
 function fetchPostsByUserId(userId) {
+    showLoader()
     posts.innerHTML = "";
 
     fetch("https://jsonplaceholder.typicode.com/posts")
@@ -124,6 +146,7 @@ function fetchPostsByUserId(userId) {
                     posts.appendChild(userPost);
                 }
             });
+            hideLoader()
         });
 }
 

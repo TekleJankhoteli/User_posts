@@ -49,7 +49,7 @@ allButton.addEventListener("click", () => {
 });
 
 
-// function for fetch users and eventlisteners for userName
+// function for fetch users and eventlistener for userName
 function fetchUsers() {
     fetch("https://jsonplaceholder.typicode.com/users")
         .then((res) => res.json())
@@ -63,19 +63,11 @@ function fetchUsers() {
                 userName.style.cursor = "pointer";
 
 
-                // mouseover/mouseout
-                userName.addEventListener("mouseover",()=>{
-                     userName.style.backgroundColor="#FFE5CC";
-                })
-
-                userName.addEventListener("mouseout",()=>{
-                    userName.style.backgroundColor="#E7D4CC";
-               })
-
-
+             
+    
             //    cklick
                 userName.addEventListener("click", () => {
-
+                    console.log("cklicked")
                     let firstSelectedUser=users.querySelector('.selected')
                     if(firstSelectedUser){
                         firstSelectedUser.classList.remove("selected")
@@ -86,6 +78,8 @@ function fetchUsers() {
                     showAllPosts = false;
                     fetchPostsByUserId(selectedUserId); 
                 });
+
+
               
                 users.appendChild(userName);
                 
